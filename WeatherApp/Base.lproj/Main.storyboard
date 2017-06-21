@@ -31,59 +31,20 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFg-pK-1My">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMZ-59-yxE">
-                                <rect key="frame" x="82.5" y="174" width="210" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="210" id="ivk-fY-ZcS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkL-EI-2D0">
-                                <rect key="frame" x="162" y="237.5" width="52" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ug2-7v-oaZ">
-                                <rect key="frame" x="80.5" y="318" width="214.5" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WeatherState" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abU-m1-Z5l">
-                                <rect key="frame" x="117" y="416" width="142" height="29"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.68187628209999995" green="0.88120387330000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="abU-m1-Z5l" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0bD-LN-RuA"/>
-                            <constraint firstItem="rkL-EI-2D0" firstAttribute="top" secondItem="OMZ-59-yxE" secondAttribute="bottom" constant="34.5" id="6BT-gd-sSF"/>
-                            <constraint firstItem="Ug2-7v-oaZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Bve-uP-odA"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="V3c-iY-4oT" secondAttribute="bottom" constant="27" id="Dh6-LU-pNJ"/>
-                            <constraint firstItem="abU-m1-Z5l" firstAttribute="top" secondItem="Ug2-7v-oaZ" secondAttribute="bottom" constant="50" id="NTb-JM-s46"/>
-                            <constraint firstItem="OMZ-59-yxE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="154" id="PKr-me-Hqm"/>
                             <constraint firstItem="lFg-pK-1My" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="YuF-5o-L4u"/>
-                            <constraint firstItem="OMZ-59-yxE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="agh-dW-nU5"/>
                             <constraint firstItem="lFg-pK-1My" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kIa-pA-9Sx"/>
                             <constraint firstAttribute="trailing" secondItem="lFg-pK-1My" secondAttribute="trailing" id="q91-xL-fvn"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lFg-pK-1My" secondAttribute="bottom" id="qt0-RS-Rf0"/>
-                            <constraint firstItem="Ug2-7v-oaZ" firstAttribute="top" secondItem="rkL-EI-2D0" secondAttribute="bottom" constant="44.5" id="tjt-gw-jD5"/>
                             <constraint firstItem="V3c-iY-4oT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vyb-4a-TsY"/>
-                            <constraint firstItem="rkL-EI-2D0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zgK-Wh-ahI"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cityLabel" destination="rkL-EI-2D0" id="YGQ-Ff-cVb"/>
-                        <outlet property="dateLabel" destination="OMZ-59-yxE" id="K5S-6t-iDa"/>
                         <outlet property="pageScroller" destination="V3c-iY-4oT" id="A0f-JC-ItA"/>
                         <outlet property="slideScrollView" destination="lFg-pK-1My" id="Ysn-9u-Gx7"/>
-                        <outlet property="temperatureLabel" destination="Ug2-7v-oaZ" id="2Q6-4e-ckn"/>
-                        <outlet property="weatherStateLabel" destination="abU-m1-Z5l" id="TrO-Rz-L0T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
