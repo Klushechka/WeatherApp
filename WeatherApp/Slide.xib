@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="Slide" customModule="WeatherApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ts-jb-RrN">
+                    <rect key="frame" x="166.5" y="150" width="43" height="25.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7P-DU-NFy">
+                    <rect key="frame" x="169" y="235.5" width="37" height="25.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WP8-M9-dEW">
+                    <rect key="frame" x="123" y="424" width="129.5" height="25.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sw0-Ad-LwJ">
+                    <rect key="frame" x="91.5" y="321" width="193.5" height="43"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.68187628209999995" green="0.88120387330000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="K7P-DU-NFy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0CQ-IE-VNg"/>
+                <constraint firstItem="WP8-M9-dEW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4QX-a4-Fbr"/>
+                <constraint firstItem="7ts-jb-RrN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="RMe-dS-amN"/>
+                <constraint firstItem="K7P-DU-NFy" firstAttribute="top" secondItem="7ts-jb-RrN" secondAttribute="bottom" constant="60" id="WNL-a8-ZW9"/>
+                <constraint firstItem="WP8-M9-dEW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aEN-8x-OPS"/>
+                <constraint firstItem="WP8-M9-dEW" firstAttribute="top" secondItem="Sw0-Ad-LwJ" secondAttribute="bottom" constant="60" id="bJ4-8L-0an"/>
+                <constraint firstItem="Sw0-Ad-LwJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="df8-2Q-eCs"/>
+                <constraint firstItem="7ts-jb-RrN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="150" id="ojN-o8-Vi3"/>
+                <constraint firstItem="Sw0-Ad-LwJ" firstAttribute="top" secondItem="K7P-DU-NFy" secondAttribute="bottom" constant="60" id="ujj-lF-zet"/>
+            </constraints>
+            <connections>
+                <outlet property="citySlideLabel" destination="K7P-DU-NFy" id="EkD-xb-e5o"/>
+                <outlet property="dateSlideLabel" destination="7ts-jb-RrN" id="gWL-JS-5K6"/>
+                <outlet property="tamperatureSlideLabel" destination="Sw0-Ad-LwJ" id="60G-th-lLs"/>
+                <outlet property="weatherStateSlideLabel" destination="WP8-M9-dEW" id="bYY-vy-eoy"/>
+            </connections>
+        </view>
+    </objects>
+</document>
