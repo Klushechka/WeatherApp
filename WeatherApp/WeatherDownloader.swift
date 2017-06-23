@@ -10,11 +10,11 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-
 class WeatherDownloader {
     static var sharedWeatherInstance = WeatherDownloader()
     let session = Alamofire.SessionManager.default
     var index = 0
+    var count = 0
     
     func gettingWeatherData(lat: Double, lon: Double, complition: @escaping (_ weatherData: WeatherData) -> ()) {
         
@@ -22,25 +22,27 @@ class WeatherDownloader {
         
         let parameters: [String: Any] = ["lat": lat, "lon": lon, "lang": "ru", "appid": Constants.OpenWeatherMap.apiKey]
         
-        session.request(url, method: .get, parameters: parameters).responseJSON { dataResponse in
-            switch dataResponse.result {
-            case .success(let value):
+        if count < 1 { // tempopary hardcode to limit the number of requests to openweathermap (
+            session.request(url, method: .get, parameters: parameters).responseJSON { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
                 
                 let json = JSON(value)
                 guard let date = json["list"][self.index]["dt"].double else {return}
                 print ("Now index is \(self.index)")
-                print (json["list"][self.index]["dt"].double)
+                print (json["list"][self.index]["dt"].double!)
                 guard let city = json["city"]["name"].string else {return}
                 guard let temperature = json["list"][self.index]["main"]["temp"].double else {return}
                 guard let weatherState = json["list"][self.index]["weather"][self.index]["description"].string else {return}
                 
                 DispatchQueue.main.async {
                     complition(WeatherData(city: city, date: date, temperature: temperature, weatherState: weatherState))
-                    print ("date is \(date)")
                 }
+                    self.count += 1
                 
             case .failure(let error):
                 print (error)
+                }
             }
         }
     }

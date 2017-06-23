@@ -22,16 +22,21 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         slideScrollView.delegate = self
         locationManager.delegate = self as CLLocationManagerDelegate
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.distanceFilter = 15
+        locationManager.startUpdatingLocation()
+        
         slides = createSlides()
         setupSlideScrollView(slides: slides)
+        
         pageScroller.numberOfPages = slides.count
         pageScroller.currentPage = 0
         view.bringSubview(toFront: pageScroller)
     }
     
+    //updating the labels values
     func updateUI2(_ weatherData: WeatherData) {
         let date = Date(timeIntervalSince1970: weatherData.date!)
         
@@ -49,6 +54,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    //creating the views
     func createSlides() -> [Slide]{
         let slide1: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
          let slide2: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
@@ -58,6 +64,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         return [slide1, slide2, slide3, slide4, slide5]
     }
     
+    //seth the settings for scrollview
     func setupSlideScrollView(slides: [Slide]) {
         slideScrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         slideScrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: view.frame.height)
@@ -76,7 +83,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             self.updateUI2(weatherData)
         })
     }
-
+    
+    //getting the number of page which is now opened
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         loadWeatherAndUpdateUI()
         pageIndex = round(scrollView.contentOffset.x/view.frame.width)
