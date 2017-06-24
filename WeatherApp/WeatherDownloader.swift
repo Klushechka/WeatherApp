@@ -26,7 +26,7 @@ class WeatherDownloader {
         
         guard let url = URL(string: "http://api.openweathermap.org/data/2.5/forecast/daily") else { return }
         
-        let parameters: [String: Any] = ["lat": lat, "lon": lon, "lang": "ru", "appid": Constants.OpenWeatherMap.apiKey]
+        let parameters: [String: Any] = ["lat": lat, "lon": lon, "lang": "eng", "appid": Constants.OpenWeatherMap.apiKey]
         
         if count < 1 { // tempopary hardcode to limit the number of requests to openweathermap :(
             session.request(url, method: .get, parameters: parameters).responseJSON { dataResponse in
@@ -39,7 +39,7 @@ class WeatherDownloader {
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd MMM"
-                dateFormatter.locale = Locale(identifier: "ru_RU")
+                dateFormatter.locale = Locale(identifier: "en_US")
                 
                 //putting the weather forecast data into dictionaries
                 for i in 0..<daysArray.count {

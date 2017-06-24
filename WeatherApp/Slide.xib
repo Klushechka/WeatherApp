@@ -19,7 +19,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDH-iN-9OQ">
-                    <rect key="frame" x="113" y="250" width="150" height="0.0"/>
+                    <rect key="frame" x="113" y="220" width="150" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="Ymu-Bc-4da"/>
                     </constraints>
@@ -28,7 +28,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yG7-Y8-gX9">
-                    <rect key="frame" x="62.5" y="210" width="250" height="0.0"/>
+                    <rect key="frame" x="62.5" y="180" width="250" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="I9o-fG-7wV"/>
                     </constraints>
@@ -37,7 +37,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHo-Ms-nwb">
-                    <rect key="frame" x="102.5" y="160" width="170" height="0.0"/>
+                    <rect key="frame" x="102.5" y="130" width="170" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="170" id="6Ax-5H-06t"/>
                     </constraints>
@@ -46,7 +46,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1h5-5b-G5t">
-                    <rect key="frame" x="77.5" y="300" width="220" height="0.0"/>
+                    <rect key="frame" x="77.5" y="270" width="220" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="220" id="Ool-3k-EQn"/>
                     </constraints>
@@ -54,13 +54,20 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3ir-Yw-NCk">
+                    <rect key="frame" x="143" y="330" width="90" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="R31-oD-4ad"/>
+                        <constraint firstAttribute="height" constant="90" id="mtz-0c-Ujn"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="EFi-mT-m5H" secondAttribute="bottom" id="3GJ-95-0JS"/>
                 <constraint firstItem="FHo-Ms-nwb" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="7fT-36-d6s"/>
                 <constraint firstItem="uDH-iN-9OQ" firstAttribute="top" secondItem="yG7-Y8-gX9" secondAttribute="bottom" constant="40" id="9go-LV-CbQ"/>
                 <constraint firstItem="yG7-Y8-gX9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="AN1-hG-x3A"/>
-                <constraint firstItem="FHo-Ms-nwb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="160" id="DH9-q6-vmn"/>
+                <constraint firstItem="FHo-Ms-nwb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="130" id="DH9-q6-vmn"/>
                 <constraint firstItem="1h5-5b-G5t" firstAttribute="top" secondItem="uDH-iN-9OQ" secondAttribute="bottom" constant="50" id="HfJ-br-4KJ"/>
                 <constraint firstItem="EFi-mT-m5H" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Hvr-zA-6ME"/>
                 <constraint firstItem="EFi-mT-m5H" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KOx-vE-zpa"/>
@@ -68,11 +75,14 @@
                 <constraint firstItem="1h5-5b-G5t" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fEy-Md-3oG"/>
                 <constraint firstItem="yG7-Y8-gX9" firstAttribute="top" secondItem="FHo-Ms-nwb" secondAttribute="bottom" constant="50" id="fUC-RX-gWy"/>
                 <constraint firstAttribute="trailing" secondItem="EFi-mT-m5H" secondAttribute="trailing" id="gGu-tY-3DW"/>
+                <constraint firstItem="3ir-Yw-NCk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hSb-mJ-WHX"/>
+                <constraint firstItem="3ir-Yw-NCk" firstAttribute="top" secondItem="1h5-5b-G5t" secondAttribute="bottom" constant="60" id="xrc-Su-BxG"/>
             </constraints>
             <connections>
                 <outlet property="citySlideLabel" destination="yG7-Y8-gX9" id="aIf-Jm-nwI"/>
                 <outlet property="dateSlideLabel" destination="FHo-Ms-nwb" id="vqg-SW-Kz6"/>
                 <outlet property="temperatureSlideLabel" destination="uDH-iN-9OQ" id="EPm-v4-9vK"/>
+                <outlet property="weatherStateSlideIcon" destination="3ir-Yw-NCk" id="3lV-vZ-4aW"/>
                 <outlet property="weatherStateSlideLabel" destination="1h5-5b-G5t" id="etG-5s-NSU"/>
             </connections>
             <point key="canvasLocation" x="394.5" y="104.5"/>

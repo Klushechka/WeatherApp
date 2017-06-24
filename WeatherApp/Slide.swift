@@ -13,4 +13,5 @@ class Slide: UIView {
     @IBOutlet weak var citySlideLabel: UILabel!
     @IBOutlet weak var temperatureSlideLabel: UILabel!
     @IBOutlet weak var weatherStateSlideLabel: UILabel!
+    @IBOutlet weak var weatherStateSlideIcon: UIImageView!
 }

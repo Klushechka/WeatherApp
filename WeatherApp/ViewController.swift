@@ -62,6 +62,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 }
                 if let weatherState = weatherData.fiveDaysForecast[i]["weatherState"] as? String {
                     slides[i].weatherStateSlideLabel.text = weatherState
+                    slides[i].weatherStateSlideIcon.image = UIImage(named: weatherState)
             }
         }
     }
