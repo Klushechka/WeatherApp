@@ -16,27 +16,41 @@ class WeatherDownloader {
     var index = 0
     var count = 0
     
-    func gettingWeatherData(lat: Double, lon: Double, complition: @escaping (_ weatherData: WeatherData) -> ()) {
+    var dayOneData = [String: Any]()
+    var dayTwoData = [String: Any]()
+    var dayThreeData = [String: Any]()
+    var dayFourData = [String: Any]()
+    var dayFiveData = [String: Any]()
+    
+    func gettingWeatherData(lat: Double, lon: Double, completion: @escaping (_ weatherData: WeatherData) -> ()) {
         
-        guard let url = URL(string: "http://api.openweathermap.org/data/2.5/forecast") else { return }
+        guard let url = URL(string: "http://api.openweathermap.org/data/2.5/forecast/daily") else { return }
         
         let parameters: [String: Any] = ["lat": lat, "lon": lon, "lang": "ru", "appid": Constants.OpenWeatherMap.apiKey]
         
-        if count < 1 { // tempopary hardcode to limit the number of requests to openweathermap (
+        if count < 1 { // tempopary hardcode to limit the number of requests to openweathermap :(
             session.request(url, method: .get, parameters: parameters).responseJSON { dataResponse in
                 switch dataResponse.result {
+                    
                 case .success(let value):
-                
+                    
+                var daysArray = [self.dayOneData, self.dayTwoData, self.dayThreeData, self.dayFourData, self.dayFiveData]
                 let json = JSON(value)
-                guard let date = json["list"][self.index]["dt"].double else {return}
-                print ("Now index is \(self.index)")
-                print (json["list"][self.index]["dt"].double!)
-                guard let city = json["city"]["name"].string else {return}
-                guard let temperature = json["list"][self.index]["main"]["temp"].double else {return}
-                guard let weatherState = json["list"][self.index]["weather"][self.index]["description"].string else {return}
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd MMM"
+                dateFormatter.locale = Locale(identifier: "ru_RU")
+                
+                //putting the weather forecast data into dictionaries
+                for i in 0..<daysArray.count {
+                    daysArray[i]["date"] = dateFormatter.string(from: Date(timeIntervalSince1970: (json["list"][i]["dt"].double)!))
+                    daysArray[i]["temperature"] = json["list"][i]["temp"]["day"].double
+                    daysArray[i]["weatherState"] = json["list"][i]["weather"][self.index]["description"].string
+                    daysArray[i]["city"] = json["city"]["name"].string
+                }
                 
                 DispatchQueue.main.async {
-                    complition(WeatherData(city: city, date: date, temperature: temperature, weatherState: weatherState))
+                    completion(WeatherData(fiveDaysForecast: daysArray))
                 }
                     self.count += 1
                 

@@ -25,7 +25,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
-        locationManager.distanceFilter = 15
+        locationManager.distanceFilter = 20
         locationManager.startUpdatingLocation()
         
         slides = createSlides()
@@ -36,27 +36,39 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         view.bringSubview(toFront: pageScroller)
     }
     
-    //updating the labels values
-    func updateUI2(_ weatherData: WeatherData) {
-        let date = Date(timeIntervalSince1970: weatherData.date!)
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM"
-        dateFormatter.locale = Locale(identifier: "ru_RU")
-        
+    //updating labels values for views
+    func updateUI3(_ weatherData: WeatherData) {
         for i in 0..<slides.count {
-            slides[i].dateSlideLabel.text = dateFormatter.string(from: date)
-            slides[i].citySlideLabel.text = weatherData.city
-            slides[i].weatherStateSlideLabel.text = weatherData.weatherState
-            if let temp = weatherData.temperature {
-                slides[i].tamperatureSlideLabel.text = "\(round(temp - 273.15))˚"
+                slides[i].dateSlideLabel.text = (weatherData.fiveDaysForecast[i]["date"] as! String)
+                slides[i].citySlideLabel.text = (weatherData.fiveDaysForecast[i]["city"] as! String)
+                if let temp = weatherData.fiveDaysForecast[i]["temperature"]{
+                    
+                    //defining the sign (+ or -) for temperature
+                    var sign: String? = nil
+                    if (temp as! Double - 273.15) > 0 {
+                        sign = "+"
+                    } else if (temp as! Double - 273.15) < 0 {
+                        sign = "-"
+                    } else {
+                        sign = nil
+                    }
+                    
+                    //adding the sign to the temperature if it's > 0 or < 0
+                    if let sign = sign {
+                        slides[i].tamperatureSlideLabel.text = "\(sign)\(round(temp as! Double - 273.15))˚"
+                    } else { // if temperature == 0
+                         slides[i].tamperatureSlideLabel.text = "\(round(temp as! Double - 273.15))˚"
+                    }
+                }
+                if let weatherState = weatherData.fiveDaysForecast[i]["weatherState"] as? String {
+                    slides[i].weatherStateSlideLabel.text = weatherState
             }
         }
     }
     
     //creating the views
     func createSlides() -> [Slide]{
-        let slide1: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
+         let slide1: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
          let slide2: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
          let slide3: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
          let slide4: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
@@ -64,7 +76,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         return [slide1, slide2, slide3, slide4, slide5]
     }
     
-    //seth the settings for scrollview
+    //defining the scrollview settings
     func setupSlideScrollView(slides: [Slide]) {
         slideScrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         slideScrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: view.frame.height)
@@ -79,14 +91,13 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     func loadWeatherAndUpdateUI() {
         guard let latitude = locationManager.location?.coordinate.latitude else { return }
         guard let longtitude = locationManager.location?.coordinate.longitude else { return }
-        WeatherDownloader.sharedWeatherInstance.gettingWeatherData(lat: latitude, lon: longtitude, complition: { (weatherData) in
-            self.updateUI2(weatherData)
+        WeatherDownloader.sharedWeatherInstance.gettingWeatherData(lat: latitude, lon: longtitude, completion: { (weatherData) in
+            self.updateUI3(weatherData)
         })
     }
     
     //getting the number of page which is now opened
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        loadWeatherAndUpdateUI()
         pageIndex = round(scrollView.contentOffset.x/view.frame.width)
         if let pageNumber = pageIndex {
             pageScroller.currentPage = Int(pageNumber)

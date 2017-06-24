@@ -7,8 +7,6 @@
 //
 
 struct WeatherData {
-    var city: String?
-    var date: Double?
-    var temperature: Double?
-    var weatherState: String?
+    var fiveDaysForecast: [[String: Any]]
 }
+
