@@ -39,30 +39,39 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     //updating labels values for views
     func updateUI3(_ weatherData: WeatherData) {
         for i in 0..<slides.count {
-                slides[i].dateSlideLabel.text = (weatherData.fiveDaysForecast[i]["date"] as! String)
-                slides[i].citySlideLabel.text = (weatherData.fiveDaysForecast[i]["city"] as! String)
-                if let temp = weatherData.fiveDaysForecast[i]["temperature"]{
+            slides[i].dateSlideLabel.text = (weatherData.fiveDaysForecast[i]["date"] as! String)
+            
+           //storing/caching the data so that user would see it while starting the app in the offline
+            UserDefaults.standard.set(weatherData.fiveDaysForecast[i]["date"] as! String, forKey: "date\(i)")
+            
+            slides[i].citySlideLabel.text = (weatherData.fiveDaysForecast[i]["city"] as! String)
+            UserDefaults.standard.set(weatherData.fiveDaysForecast[i]["city"] as! String, forKey: "city")
+            if let temp = weatherData.fiveDaysForecast[i]["temperature"]{
                     
                     //defining the sign (+ or -) for temperature
-                    var sign: String? = nil
-                    if (temp as! Double - 273.15) > 0 {
+                var sign: String? = nil
+                if (temp as! Double - 273.15) > 0 {
                         sign = "+"
-                    } else if (temp as! Double - 273.15) < 0 {
+                } else if (temp as! Double - 273.15) < 0 {
                         sign = "-"
-                    } else {
+                } else {
                         sign = nil
-                    }
+                }
                     
                     //adding the sign to the temperature if it's > 0 or < 0
-                    if let sign = sign {
-                        slides[i].temperatureSlideLabel.text = "\(sign)\(round(temp as! Double - 273.15))˚"
-                    } else { // if temperature == 0
-                         slides[i].temperatureSlideLabel.text = "\(round(temp as! Double - 273.15))˚"
-                    }
+                if let sign = sign {
+                    slides[i].temperatureSlideLabel.text = "\(sign)\(round(temp as! Double - 273.15))˚"
+                    UserDefaults.standard.set("\(sign)\(round(temp as! Double - 273.15))˚", forKey: "temperature\(i)")
+                } else { // if temperature == 0
+                     slides[i].temperatureSlideLabel.text = "\(round(temp as! Double - 273.15))˚"
+                    UserDefaults.standard.set("\(round(temp as! Double - 273.15))˚", forKey: "temperature\(i)")
                 }
+            }
                 if let weatherState = weatherData.fiveDaysForecast[i]["weatherState"] as? String {
                     slides[i].weatherStateSlideLabel.text = weatherState
+                    UserDefaults.standard.set(weatherState, forKey: "weatherState\(i)")
                     slides[i].weatherStateSlideIcon.image = UIImage(named: weatherState)
+//                    UserDefaults.standard.set(UIImage(named: weatherState), forKey: "weatherStateIcon")
             }
         }
     }
@@ -104,6 +113,25 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             pageScroller.currentPage = Int(pageNumber)
             WeatherDownloader.sharedWeatherInstance.index = pageScroller.currentPage
             print ("Page number is: \(pageScroller.currentPage)")
+        }
+    }
+    // using viewDidAppear to make sure that ui is really ready and show the cached data
+    override func viewDidAppear(_ animated: Bool) {
+        for i in 0..<slides.count {
+            if let temp = UserDefaults.standard.object(forKey: "temperature\(i)") {
+                slides[i].temperatureSlideLabel.text = temp as? String
+            }
+            if let city = UserDefaults.standard.object(forKey: "city") {
+                slides[i].citySlideLabel.text = city as? String
+            }
+            if let date = UserDefaults.standard.object(forKey: "date\(i)") {
+                slides[i].dateSlideLabel.text = date as? String
+            }
+            if let weatherState = UserDefaults.standard.object(forKey: "weatherState\(i)") {
+                slides[i].weatherStateSlideLabel.text = weatherState as? String
+                slides[i].weatherStateSlideIcon.image = UIImage(named: weatherState as! String)
+            }
+            
         }
     }
 }
