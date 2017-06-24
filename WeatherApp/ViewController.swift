@@ -55,9 +55,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                     
                     //adding the sign to the temperature if it's > 0 or < 0
                     if let sign = sign {
-                        slides[i].tamperatureSlideLabel.text = "\(sign)\(round(temp as! Double - 273.15))˚"
+                        slides[i].temperatureSlideLabel.text = "\(sign)\(round(temp as! Double - 273.15))˚"
                     } else { // if temperature == 0
-                         slides[i].tamperatureSlideLabel.text = "\(round(temp as! Double - 273.15))˚"
+                         slides[i].temperatureSlideLabel.text = "\(round(temp as! Double - 273.15))˚"
                     }
                 }
                 if let weatherState = weatherData.fiveDaysForecast[i]["weatherState"] as? String {

@@ -30,9 +30,9 @@
                             </pageControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFg-pK-1My">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.68187628209999995" green="0.88120387330000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="V3c-iY-4oT" secondAttribute="bottom" constant="27" id="Dh6-LU-pNJ"/>
                             <constraint firstItem="lFg-pK-1My" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="YuF-5o-L4u"/>
