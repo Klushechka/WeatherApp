@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "sky is clear.png",
+      "filename" : "clear sky.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "clear sky-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "clear sky-2.png",
       "scale" : "3x"
     }
   ],
