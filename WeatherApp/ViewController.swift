@@ -22,7 +22,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         slideScrollView.delegate = self
         locationManager.delegate = self as CLLocationManagerDelegate
-        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
         locationManager.distanceFilter = 20
@@ -71,7 +71,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                     slides[i].weatherStateSlideLabel.text = weatherState
                     UserDefaults.standard.set(weatherState, forKey: "weatherState\(i)")
                     slides[i].weatherStateSlideIcon.image = UIImage(named: weatherState)
-//                    UserDefaults.standard.set(UIImage(named: weatherState), forKey: "weatherStateIcon")
             }
         }
     }

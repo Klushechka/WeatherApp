@@ -28,35 +28,33 @@ class WeatherDownloader {
         
         let parameters: [String: Any] = ["lat": lat, "lon": lon, "lang": "eng", "appid": Constants.OpenWeatherMap.apiKey]
         
-        if count < 1 { // tempopary hardcode to limit the number of requests to openweathermap :(
-            session.request(url, method: .get, parameters: parameters).responseJSON { dataResponse in
+        session.request(url, method: .get, parameters: parameters).responseJSON { dataResponse in
                 switch dataResponse.result {
                     
-                case .success(let value):
+            case .success(let value):
                     
-                var daysArray = [self.dayOneData, self.dayTwoData, self.dayThreeData, self.dayFourData, self.dayFiveData]
-                let json = JSON(value)
+            var daysArray = [self.dayOneData, self.dayTwoData, self.dayThreeData, self.dayFourData, self.dayFiveData]
+            let json = JSON(value)
                 
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd MMM"
-                dateFormatter.locale = Locale(identifier: "en_US")
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MMM"
+            dateFormatter.locale = Locale(identifier: "en_US")
                 
                 //putting the weather forecast data into dictionaries
-                for i in 0..<daysArray.count {
-                    daysArray[i]["date"] = dateFormatter.string(from: Date(timeIntervalSince1970: (json["list"][i]["dt"].double)!))
+            for i in 0..<daysArray.count {
+                daysArray[i]["date"] = dateFormatter.string(from: Date(timeIntervalSince1970: (json["list"][i]["dt"].double)!))
                     daysArray[i]["temperature"] = json["list"][i]["temp"]["day"].double
                     daysArray[i]["weatherState"] = json["list"][i]["weather"][0]["description"].string
                     daysArray[i]["city"] = json["city"]["name"].string
                 }
                 
-                DispatchQueue.main.async {
-                    completion(WeatherData(fiveDaysForecast: daysArray))
+            DispatchQueue.main.async {
+                completion(WeatherData(fiveDaysForecast: daysArray))
                 }
-                    self.count += 1
+                self.count += 1
                 
             case .failure(let error):
                 print (error)
-                }
             }
         }
     }
