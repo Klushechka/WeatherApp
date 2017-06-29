@@ -17,6 +17,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     var locationManager = CLLocationManager()
     var slides = [Slide]()
     var pageIndex: CGFloat? = nil
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,23 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         view.bringSubview(toFront: pageScroller)
     }
     
+    func startShowingActivityIndicator() {
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        activityIndicator.startAnimating()
+        view.addSubview(activityIndicator)
+    UIApplication.shared.beginIgnoringInteractionEvents()
+        print ("Я ТУТ!")
+    }
+    
+     func endShowingActivityIdicator() {
+        activityIndicator.stopAnimating()
+        
+        UIApplication.shared.endIgnoringInteractionEvents()
+        activityIndicator.removeFromSuperview()
+        print("Меня больше нет!")
+    }
     //updating labels values for views
     func updateUI3(_ weatherData: WeatherData) {
         for i in 0..<slides.count {
@@ -72,6 +90,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                     UserDefaults.standard.set(weatherState, forKey: "weatherState\(i)")
                     slides[i].weatherStateSlideIcon.image = UIImage(named: weatherState)
             }
+             endShowingActivityIdicator()
         }
     }
     
@@ -138,11 +157,13 @@ class ViewController: UIViewController, UIScrollViewDelegate {
 extension ViewController : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
+            startShowingActivityIndicator()
             loadWeatherAndUpdateUI()
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        startShowingActivityIndicator()
         loadWeatherAndUpdateUI()
     }
 }

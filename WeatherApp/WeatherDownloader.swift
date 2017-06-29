@@ -21,6 +21,7 @@ class WeatherDownloader {
     var dayThreeData = [String: Any]()
     var dayFourData = [String: Any]()
     var dayFiveData = [String: Any]()
+
     
     func gettingWeatherData(lat: Double, lon: Double, completion: @escaping (_ weatherData: WeatherData) -> ()) {
         
