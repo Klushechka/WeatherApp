@@ -19,16 +19,17 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDH-iN-9OQ">
-                    <rect key="frame" x="113" y="307" width="150" height="54"/>
+                    <rect key="frame" x="88" y="300" width="200" height="68.5"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="150" id="Ymu-Bc-4da"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="5vO-J7-mjO"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="45"/>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="57"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
+                    <size key="shadowOffset" width="0.0" height="2"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yG7-Y8-gX9">
-                    <rect key="frame" x="62.5" y="215" width="250" height="42"/>
+                    <rect key="frame" x="62.5" y="208" width="250" height="42"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="I9o-fG-7wV"/>
                     </constraints>
@@ -37,16 +38,17 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHo-Ms-nwb">
-                    <rect key="frame" x="102.5" y="129" width="170" height="42"/>
+                    <rect key="frame" x="102.5" y="122" width="170" height="42"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="170" id="6Ax-5H-06t"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="35"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
+                    <size key="shadowOffset" width="0.0" height="2"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1h5-5b-G5t">
-                    <rect key="frame" x="37.5" y="401" width="300" height="42"/>
+                    <rect key="frame" x="37.5" y="408.5" width="300" height="42"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="Ool-3k-EQn"/>
                     </constraints>
@@ -55,7 +57,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3ir-Yw-NCk">
-                    <rect key="frame" x="143" y="483" width="90" height="90"/>
+                    <rect key="frame" x="143" y="490.5" width="90" height="90"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="90" id="R31-oD-4ad"/>
                         <constraint firstAttribute="height" constant="90" id="mtz-0c-Ujn"/>
