@@ -9,6 +9,7 @@
 import UIKit
 
 class Slide: UIView {
+    @IBOutlet weak var backgroundSlideImage: UIImageView!
     @IBOutlet weak var dateSlideLabel: UILabel!
     @IBOutlet weak var citySlideLabel: UILabel!
     @IBOutlet weak var temperatureSlideLabel: UILabel!

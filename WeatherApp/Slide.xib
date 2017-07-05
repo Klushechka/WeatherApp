@@ -15,47 +15,47 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Peace2" highlightedImage="Peace2" translatesAutoresizingMaskIntoConstraints="NO" id="EFi-mT-m5H">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" highlightedImage="0" translatesAutoresizingMaskIntoConstraints="NO" id="EFi-mT-m5H">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDH-iN-9OQ">
-                    <rect key="frame" x="113" y="308" width="150" height="51.5"/>
+                    <rect key="frame" x="113" y="307" width="150" height="54"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="Ymu-Bc-4da"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="43"/>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="45"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yG7-Y8-gX9">
-                    <rect key="frame" x="62.5" y="221" width="250" height="37"/>
+                    <rect key="frame" x="62.5" y="217.5" width="250" height="39.5"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="I9o-fG-7wV"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="31"/>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="33"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHo-Ms-nwb">
-                    <rect key="frame" x="102.5" y="140" width="170" height="37"/>
+                    <rect key="frame" x="102.5" y="134" width="170" height="39.5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="170" id="6Ax-5H-06t"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="31"/>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="33"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1h5-5b-G5t">
-                    <rect key="frame" x="37.5" y="399.5" width="300" height="37"/>
+                    <rect key="frame" x="37.5" y="401" width="300" height="39.5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="Ool-3k-EQn"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="31"/>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="33"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3ir-Yw-NCk">
-                    <rect key="frame" x="143" y="476.5" width="90" height="90"/>
+                    <rect key="frame" x="143" y="480.5" width="90" height="90"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="90" id="R31-oD-4ad"/>
                         <constraint firstAttribute="height" constant="90" id="mtz-0c-Ujn"/>
@@ -79,6 +79,7 @@
                 <constraint firstItem="yG7-Y8-gX9" firstAttribute="top" secondItem="FHo-Ms-nwb" secondAttribute="bottom" constant="44" id="yrF-uL-q1s"/>
             </constraints>
             <connections>
+                <outlet property="backgroundSlideImage" destination="EFi-mT-m5H" id="ev2-6f-BZF"/>
                 <outlet property="citySlideLabel" destination="yG7-Y8-gX9" id="aIf-Jm-nwI"/>
                 <outlet property="dateSlideLabel" destination="FHo-Ms-nwb" id="vqg-SW-Kz6"/>
                 <outlet property="temperatureSlideLabel" destination="uDH-iN-9OQ" id="EPm-v4-9vK"/>
@@ -89,6 +90,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Peace2" width="960" height="600"/>
+        <image name="0" width="900" height="1197"/>
     </resources>
 </document>

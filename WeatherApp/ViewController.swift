@@ -55,9 +55,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     //updating labels values for views
     func updateUI3(_ weatherData: WeatherData) {
         for i in 0..<slides.count {
+            slides[i].backgroundSlideImage.image = UIImage(named: String(i))
+            //storing/caching the data so that user would see it while starting the app in the offline
             slides[i].dateSlideLabel.text = (weatherData.fiveDaysForecast[i]["date"] as! String)
-            
-           //storing/caching the data so that user would see it while starting the app in the offline
             UserDefaults.standard.set(weatherData.fiveDaysForecast[i]["date"] as! String, forKey: "date\(i)")
             
             slides[i].citySlideLabel.text = (weatherData.fiveDaysForecast[i]["city"] as! String)
