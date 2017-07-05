@@ -44,7 +44,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         activityIndicator.startAnimating()
         view.addSubview(activityIndicator)
     UIApplication.shared.beginIgnoringInteractionEvents()
-        print ("Я ТУТ!")
     }
     
      func endShowingActivityIdicator() {
@@ -52,7 +51,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         
         UIApplication.shared.endIgnoringInteractionEvents()
         activityIndicator.removeFromSuperview()
-        print("Меня больше нет!")
     }
     //updating labels values for views
     func updateUI3(_ weatherData: WeatherData) {
@@ -116,12 +114,24 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    //getting location and info from url + updating the UI with this info
     func loadWeatherAndUpdateUI() {
         guard let latitude = locationManager.location?.coordinate.latitude else { return }
         guard let longtitude = locationManager.location?.coordinate.longitude else { return }
         WeatherDownloader.sharedWeatherInstance.gettingWeatherData(lat: latitude, lon: longtitude, completion: { (weatherData) in
             self.updateUI3(weatherData)
         })
+    }
+    
+    //the app will show default "--" for labels if user doesn't allow the app to get info about location
+    func setLabelsValuesToDefault() {
+        for i in 0..<slides.count {
+            slides[i].dateSlideLabel.text = "--"
+            slides[i].temperatureSlideLabel.text = "--"
+            slides[i].citySlideLabel.text = "--"
+            slides[i].weatherStateSlideLabel.text = "--"
+            slides[i].weatherStateSlideIcon.image = nil
+        }
     }
     
     //getting the number of page which is now opened
@@ -133,7 +143,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             print ("Page number is: \(pageScroller.currentPage)")
         }
     }
-    // using viewDidAppear to make sure that ui is really ready and show the cached data
+    // using viewDidAppear to make sure that ui is really ready to show the cached data
     override func viewDidAppear(_ animated: Bool) {
         for i in 0..<slides.count {
             if let temp = UserDefaults.standard.object(forKey: "temperature\(i)") {
@@ -149,7 +159,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 slides[i].weatherStateSlideLabel.text = weatherState as? String
                 slides[i].weatherStateSlideIcon.image = UIImage(named: weatherState as! String)
             }
-            
         }
     }
 }
@@ -159,6 +168,26 @@ extension ViewController : CLLocationManagerDelegate {
         if status == .authorizedWhenInUse {
             startShowingActivityIndicator()
             loadWeatherAndUpdateUI()
+        } else if status == .denied {
+            //labels will show default "--" if the app has no access to location info
+            setLabelsValuesToDefault()
+            // the app will show the alert with request to give the app a permission to get location info and Settings/Cancel buttons
+            let alert = UIAlertController(title: "WeatherApp doesn't know where you are", message: "Please allow the app to get your location. You can do it in Settings.", preferredStyle: UIAlertControllerStyle.alert)
+            let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+                guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                    return
+                }
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                        print("Settings opened: \(success)") // Prints true
+                    })
+                }
+            }
+            alert.addAction(settingsAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+            alert.addAction(cancelAction)
+            
+            present(alert, animated: true, completion: nil)
         }
     }
     
