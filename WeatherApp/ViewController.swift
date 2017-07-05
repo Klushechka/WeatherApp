@@ -134,6 +134,26 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    func showSettingsAlert() {
+        // the app will show the alert with request to give the app a permission to get location info and Settings/Cancel buttons
+        let alert = UIAlertController(title: "WeatherApp doesn't know where you are", message: "Please allow the app to get your location. You can do it in Settings.", preferredStyle: UIAlertControllerStyle.alert)
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+            guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                return
+            }
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                    print("Settings opened: \(success)")
+                })
+            }
+        }
+        alert.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     //getting the number of page which is now opened
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         pageIndex = round(scrollView.contentOffset.x/view.frame.width)
@@ -171,23 +191,7 @@ extension ViewController : CLLocationManagerDelegate {
         } else if status == .denied {
             //labels will show default "--" if the app has no access to location info
             setLabelsValuesToDefault()
-            // the app will show the alert with request to give the app a permission to get location info and Settings/Cancel buttons
-            let alert = UIAlertController(title: "WeatherApp doesn't know where you are", message: "Please allow the app to get your location. You can do it in Settings.", preferredStyle: UIAlertControllerStyle.alert)
-            let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
-                guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
-                    return
-                }
-                if UIApplication.shared.canOpenURL(settingsUrl) {
-                    UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                        print("Settings opened: \(success)") // Prints true
-                    })
-                }
-            }
-            alert.addAction(settingsAction)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-            alert.addAction(cancelAction)
-            
-            present(alert, animated: true, completion: nil)
+            showSettingsAlert()
         }
     }
     
