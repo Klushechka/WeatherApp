@@ -43,13 +43,13 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         activityIndicator.startAnimating()
         view.addSubview(activityIndicator)
-    UIApplication.shared.beginIgnoringInteractionEvents()
+//    UIApplication.shared.beginIgnoringInteractionEvents()
     }
     
      func endShowingActivityIdicator() {
         activityIndicator.stopAnimating()
         
-        UIApplication.shared.endIgnoringInteractionEvents()
+//        UIApplication.shared.endIgnoringInteractionEvents()
         activityIndicator.removeFromSuperview()
     }
     //updating labels values for views
