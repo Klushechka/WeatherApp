@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3224090E1F0E8C530076B990 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3224090D1F0E8C530076B990 /* Reachability.swift */; };
 		323CA28F1EFA955E008EBF0D /* Slide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 323CA28E1EFA955E008EBF0D /* Slide.xib */; };
 		323CA2911EFA958A008EBF0D /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323CA2901EFA958A008EBF0D /* Slide.swift */; };
 		32544F671EF07AB60040BF4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32544F661EF07AB60040BF4E /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		0B7EF975147F6F4B9F460B24 /* Pods_WeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3224090D1F0E8C530076B990 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		323CA28E1EFA955E008EBF0D /* Slide.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Slide.xib; sourceTree = "<group>"; };
 		323CA2901EFA958A008EBF0D /* Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
 		32544F631EF07AB60040BF4E /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +86,7 @@
 				32544F681EF07AB60040BF4E /* ViewController.swift */,
 				323CA28E1EFA955E008EBF0D /* Slide.xib */,
 				323CA2901EFA958A008EBF0D /* Slide.swift */,
+				3224090D1F0E8C530076B990 /* Reachability.swift */,
 				32B84CD01EF1D1CC00BAFF55 /* WeatherDownloader.swift */,
 				32B84CCE1EF1CB0300BAFF55 /* WeatherData.swift */,
 				32544F6A1EF07AB60040BF4E /* Main.storyboard */,
@@ -232,6 +235,7 @@
 				32544F671EF07AB60040BF4E /* AppDelegate.swift in Sources */,
 				323CA2911EFA958A008EBF0D /* Slide.swift in Sources */,
 				32B84CCF1EF1CB0300BAFF55 /* WeatherData.swift in Sources */,
+				3224090E1F0E8C530076B990 /* Reachability.swift in Sources */,
 				32B84CCD1EF1C95600BAFF55 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,16 +14,17 @@ class WeatherDownloader {
     static var sharedWeatherInstance = WeatherDownloader()
     let session = Alamofire.SessionManager.default
     var index = 0
-    var count = 0
     
     var dayOneData = [String: Any]()
     var dayTwoData = [String: Any]()
     var dayThreeData = [String: Any]()
     var dayFourData = [String: Any]()
     var dayFiveData = [String: Any]()
-
     
     func gettingWeatherData(lat: Double, lon: Double, completion: @escaping (_ weatherData: WeatherData) -> ()) {
+        
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 15 // seconds
         
         guard let url = URL(string: "http://api.openweathermap.org/data/2.5/forecast/daily") else { return }
         
@@ -52,7 +53,6 @@ class WeatherDownloader {
             DispatchQueue.main.async {
                 completion(WeatherData(fiveDaysForecast: daysArray))
                 }
-                self.count += 1
                 
             case .failure(let error):
                 print (error)
