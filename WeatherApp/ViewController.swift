@@ -18,15 +18,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     lazy var pageIndex: CGFloat? = nil
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
-//    func applicationWillEnterForeground(_ notification: NSNotification) {
-//        if !Reachability.shared.isConnectedToNetwork() {
-//            showAlert(title: "No Internet connection", message: "Please connect to Internet and try again", buttonName: "Ok")
-//            endShowingActivityIdicator()
-//        } else {
-//            loadWeatherAndUpdateUI()
-//        }
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,6 +47,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         activityIndicator.startAnimating()
+       
         view.addSubview(activityIndicator)
     }
     
@@ -65,7 +57,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     //updating labels values for views
-    func updateUI3(_ weatherData: WeatherData) {
+    func updateUI(_ weatherData: WeatherData) {
         for i in 0..<slides.count {
             slides[i]?.backgroundSlideImage.image = UIImage(named: String(i))
             //storing/caching the data so that user would see it while starting the app in the offline
@@ -129,12 +121,13 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     //getting location and info from url + updating the UI with this info
-    public func loadWeatherAndUpdateUI() {
+    func loadWeatherAndUpdateUI() {
         guard let latitude = locationManager.location?.coordinate.latitude else { return }
         guard let longtitude = locationManager.location?.coordinate.longitude else { return }
         if Reachability.shared.isConnectedToNetwork() {
             WeatherDownloader.sharedWeatherInstance.gettingWeatherData(lat: latitude, lon: longtitude, completion: { (weatherData) in
-            self.updateUI3(weatherData)
+            self.updateUI(weatherData)
+                print ("Updated!")
         })
         } else if !Reachability.shared.isConnectedToNetwork() {
             showAlert(title: "No Internet connection", message: "Please connect to the Internet and try again", buttonName: "Ok")
