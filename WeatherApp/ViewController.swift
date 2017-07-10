@@ -51,24 +51,19 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
- 
-    
-    
     func startShowingActivityIndicator() {
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         activityIndicator.startAnimating()
         view.addSubview(activityIndicator)
-//    UIApplication.shared.beginIgnoringInteractionEvents()
     }
     
      func endShowingActivityIdicator() {
         activityIndicator.stopAnimating()
-        
-//        UIApplication.shared.endIgnoringInteractionEvents()
         activityIndicator.removeFromSuperview()
     }
+    
     //updating labels values for views
     func updateUI3(_ weatherData: WeatherData) {
         for i in 0..<slides.count {
@@ -227,7 +222,7 @@ extension ViewController : CLLocationManagerDelegate {
             showSettingsAlert()
         } else if !Reachability.shared.isConnectedToNetwork() {
             endShowingActivityIdicator()
-            showAlert(title: "No Internet connection", message: "Please connect to Internet and try again", buttonName: "Ok")
+            showAlert(title: "No Internet connection", message: "Please connect to Internet and try again.", buttonName: "Ok")
         }
     }
     
