@@ -11,7 +11,7 @@ import CoreLocation
 import Foundation
 
 class ViewController: UIViewController, UIScrollViewDelegate {
-    @IBOutlet weak var pageScroller: UIPageControl!
+    @IBOutlet weak var pageScroller: UIPageControl!    
     @IBOutlet weak var slideScrollView: UIScrollView!
     var locationManager = CLLocationManager()
     lazy var slides = [Slide?]()
@@ -39,6 +39,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             pageScroller.numberOfPages = slides.count
             pageScroller.currentPage = 0
             view.bringSubview(toFront: pageScroller)
+            
+            //reaction on tapping the pageScroller (UIPageControl), it calls scrollingPages action  to open the particular page (slide)
+            pageScroller.addTarget(self, action: #selector(self.scrollingPages), for: .valueChanged)
         }
     }
     
@@ -201,6 +204,15 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 slides[i]?.weatherStateSlideIcon.image = UIImage(named: weatherState as! String)
             }
         }
+    }
+    
+    @IBAction func scrollingPages(_ sender: UIPageControl) {
+        //method which opens the next/previous page depending on tapping the pageScroller (UIPageControl)
+        let pageNumber = pageScroller.currentPage
+        var frame = slideScrollView.frame
+        frame.origin.x = frame.size.width * CGFloat(pageNumber)
+        frame.origin.y = 0
+        slideScrollView.scrollRectToVisible(frame, animated: true)
     }
 }
 

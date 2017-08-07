@@ -22,10 +22,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="V3c-iY-4oT">
-                                <rect key="frame" x="187.5" y="640" width="0.0" height="0.0"/>
+                                <rect key="frame" x="0.0" y="640" width="375" height="0.0"/>
                                 <connections>
-                                    <action selector="pageScroller:" destination="BYZ-38-t0r" eventType="valueChanged" id="oNs-cd-S2O"/>
-                                    <action selector="pageScrolling:" destination="BYZ-38-t0r" eventType="valueChanged" id="zTQ-cq-fk3"/>
+                                    <action selector="scrollingPages:" destination="BYZ-38-t0r" eventType="valueChanged" id="dFV-qM-3fU"/>
                                 </connections>
                             </pageControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFg-pK-1My">
@@ -34,8 +33,10 @@
                             </scrollView>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="V3c-iY-4oT" secondAttribute="trailing" id="9Fy-ms-a8i"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="V3c-iY-4oT" secondAttribute="bottom" constant="27" id="Dh6-LU-pNJ"/>
                             <constraint firstItem="lFg-pK-1My" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="YuF-5o-L4u"/>
+                            <constraint firstItem="V3c-iY-4oT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="afK-Ah-8eq"/>
                             <constraint firstItem="lFg-pK-1My" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kIa-pA-9Sx"/>
                             <constraint firstAttribute="trailing" secondItem="lFg-pK-1My" secondAttribute="trailing" id="q91-xL-fvn"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lFg-pK-1My" secondAttribute="bottom" id="qt0-RS-Rf0"/>
@@ -43,7 +44,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="pageScroller" destination="V3c-iY-4oT" id="A0f-JC-ItA"/>
+                        <outlet property="pageScroller" destination="V3c-iY-4oT" id="XRT-l2-aZc"/>
                         <outlet property="slideScrollView" destination="lFg-pK-1My" id="Ysn-9u-Gx7"/>
                     </connections>
                 </viewController>

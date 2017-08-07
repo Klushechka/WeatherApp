@@ -1,15 +1,27 @@
 PODS:
   - Alamofire (4.4.0)
+  - Crashlytics (3.8.5):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.12)
+  - HockeySDK (4.1.6):
+    - HockeySDK/DefaultLib (= 4.1.6)
+  - HockeySDK/DefaultLib (4.1.6)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Alamofire
+  - Crashlytics
+  - Fabric
+  - HockeySDK (~> 4.1.5)
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Crashlytics: dfbae35ef22ca189240d230ad501feea4ee85d2d
+  Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
+  HockeySDK: 95db557d54489a570dcdefae0d02f98eecc279a3
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 2775d26991010939a4e2cdb012d739df059e1f13
+PODFILE CHECKSUM: 13c8f66d7d0c8aba33feffa6873ab60d68565e64
 
 COCOAPODS: 1.2.1

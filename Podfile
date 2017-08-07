@@ -6,6 +6,9 @@ target 'WeatherApp' do
   use_frameworks!
 
 pod 'Alamofire'
+pod 'Fabric'
+pod 'Crashlytics'
 pod 'SwiftyJSON'
+pod 'HockeySDK', '~> 4.1.5'
 
 end
