@@ -149,6 +149,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         for i in 0..<slides.count {
             slides[i]?.dateSlideLabel.text = "--"
             slides[i]?.temperatureSlideLabel.text = "--"
+            slides[i]?.morningTemperatureSlideLabel.text = "--"
+            slides[i]?.eveningTemperatureSlideLabel.text = "--"
             slides[i]?.citySlideLabel.text = "--"
             slides[i]?.weatherStateSlideLabel.text = "--"
             slides[i]?.weatherStateSlideIcon.image = nil
@@ -199,6 +201,14 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             if let temp = UserDefaults.standard.object(forKey: "temperature\(i)") {
                 slides[i]?.temperatureSlideLabel.text = temp as? String
             }
+            if let temp = UserDefaults.standard.object(forKey: "morningTemperature\(i)") {
+                slides[i]?.morningTemperatureSlideLabel.text = temp as? String
+            }
+            
+            if let temp = UserDefaults.standard.object(forKey: "eveningTemperature\(i)") {
+                slides[i]?.eveningTemperatureSlideLabel.text = temp as? String
+            }
+            
             if let city = UserDefaults.standard.object(forKey: "city") {
                 slides[i]?.citySlideLabel.text = city as? String
             }
