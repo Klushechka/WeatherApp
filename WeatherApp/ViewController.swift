@@ -69,7 +69,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         } else {
             temperatureSign = ""
         }
-        return "\(temperatureSign)\(round(temperature - 273.15))˚"
+        return "\(temperatureSign)\( round((temperature - 273.15)*10)/10)˚"
     }
     
     //updating labels values for views
@@ -83,13 +83,13 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             slides[i]?.citySlideLabel.text = (weatherData.fiveDaysForecast[i]["city"] as! String)
             UserDefaults.standard.set(weatherData.fiveDaysForecast[i]["city"] as! String, forKey: "city")
                 
-            slides[i]?.temperatureSlideLabel.text = String(getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["temperature"] as! Double))
+            slides[i]?.temperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["temperature"] as! Double))
             UserDefaults.standard.set(slides[i]?.temperatureSlideLabel.text, forKey: "temperature\(i)")
             
             slides[i]?.morningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["morningTemperature"] as! Double))
             UserDefaults.standard.set(slides[i]?.morningTemperatureSlideLabel.text, forKey: "morningTemperature\(i)")
             
-            slides[i]?.eveningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["eveningTemperature"] as! Double))
+            slides[i]?.eveningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: ((weatherData.fiveDaysForecast[i]["eveningTemperature"] as! Double))))
             UserDefaults.standard.set(slides[i]?.eveningTemperatureSlideLabel.text, forKey: "eveningTemperature\(i)")
                 
                 
