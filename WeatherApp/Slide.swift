@@ -12,6 +12,8 @@ class Slide: UIView {
     @IBOutlet weak var backgroundSlideImage: UIImageView!
     @IBOutlet weak var dateSlideLabel: UILabel!
     @IBOutlet weak var citySlideLabel: UILabel!
+    @IBOutlet weak var morningTemperatureSlideLabel: UILabel!
+    @IBOutlet weak var eveningTemperatureSlideLabel: UILabel!
     @IBOutlet weak var temperatureSlideLabel: UILabel!
     @IBOutlet weak var weatherStateSlideLabel: UILabel!
     @IBOutlet weak var weatherStateSlideIcon: UIImageView!

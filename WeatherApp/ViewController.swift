@@ -17,6 +17,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     lazy var slides = [Slide?]()
     lazy var pageIndex: CGFloat? = nil
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    var temperatureSign = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         if let slideScrollView = slideScrollView {
             slideScrollView.delegate = self
         }
+        
         locationManager.delegate = self as CLLocationManagerDelegate
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
@@ -50,13 +52,24 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         activityIndicator.startAnimating()
-       
         view.addSubview(activityIndicator)
     }
     
      func endShowingActivityIdicator() {
         activityIndicator.stopAnimating()
         activityIndicator.removeFromSuperview()
+    }
+    
+    //defining the sign of temperature (+/- or nothing - for 0)
+    func getTemperatureWithSign(temperature: Double) -> String {
+        if (temperature - 273.15) > 0 {
+            temperatureSign = "+"
+        } else if (temperature - 273.15) < 0 {
+            temperatureSign = "-"
+        } else {
+            temperatureSign = ""
+        }
+        return "\(temperatureSign)\(round(temperature - 273.15))˚"
     }
     
     //updating labels values for views
@@ -69,30 +82,20 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             
             slides[i]?.citySlideLabel.text = (weatherData.fiveDaysForecast[i]["city"] as! String)
             UserDefaults.standard.set(weatherData.fiveDaysForecast[i]["city"] as! String, forKey: "city")
-            if let temp = weatherData.fiveDaysForecast[i]["temperature"]{
-                    
-                    //defining the sign (+ or -) for temperature
-                var sign: String? = nil
-                if (temp as! Double - 273.15) > 0 {
-                        sign = "+"
-                } else if (temp as! Double - 273.15) < 0 {
-                        sign = "-"
-                } else {
-                        sign = nil
-                }
-                    
-                    //adding the sign to the temperature if it's > 0 or < 0
-                if let sign = sign {
-                    slides[i]?.temperatureSlideLabel.text = "\(sign)\(round(temp as! Double - 273.15))˚"
-                    UserDefaults.standard.set("\(sign)\(round(temp as! Double - 273.15))˚", forKey: "temperature\(i)")
-                } else { // if temperature == 0
-                    slides[i]?.temperatureSlideLabel.text = "\(round(temp as! Double - 273.15))˚"
-                    UserDefaults.standard.set("\(round(temp as! Double - 273.15))˚", forKey: "temperature\(i)")
-                }
-            }
+                
+            slides[i]?.temperatureSlideLabel.text = String(getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["temperature"] as! Double))
+            UserDefaults.standard.set(slides[i]?.temperatureSlideLabel.text, forKey: "temperature\(i)")
+            
+            slides[i]?.morningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["morningTemperature"] as! Double))
+            UserDefaults.standard.set(slides[i]?.morningTemperatureSlideLabel.text, forKey: "morningTemperature\(i)")
+            
+            slides[i]?.eveningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["eveningTemperature"] as! Double))
+            UserDefaults.standard.set(slides[i]?.eveningTemperatureSlideLabel.text, forKey: "eveningTemperature\(i)")
+                
+                
                 if let weatherState = weatherData.fiveDaysForecast[i]["weatherState"] as? String {
                     slides[i]?.weatherStateSlideLabel.text = weatherState
-                    UserDefaults.standard.set(weatherState, forKey: "weatherState\(i)")
+                   // UserDefaults.standard.set(weatherState, forKey: "weatherState\(i)")
                     slides[i]?.weatherStateSlideIcon.image = UIImage(named: weatherState)
             }
              endShowingActivityIdicator()
