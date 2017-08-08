@@ -75,28 +75,31 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     //updating labels values for views
     func updateUI(_ weatherData: WeatherData) {
         for i in 0..<slides.count {
-            slides[i]?.backgroundSlideImage.image = UIImage(named: String(i))
+            if let slide = slides[i] {
+            slide.backgroundSlideImage.image = UIImage(named: String(i))
+                
             //storing/caching the data so that user would see it while starting the app in the offline
-            slides[i]?.dateSlideLabel.text = (weatherData.fiveDaysForecast[i]["date"] as! String)
-            UserDefaults.standard.set(weatherData.fiveDaysForecast[i]["date"] as! String, forKey: "date\(i)")
+            slide.dateSlideLabel.text = (weatherData.fiveDaysForecast[i]["date"] as! String)
+                UserDefaults.standard.set(weatherData.fiveDaysForecast[i]["date"] as! String, forKey: "date\(i)")
             
-            slides[i]?.citySlideLabel.text = (weatherData.fiveDaysForecast[i]["city"] as! String)
-            UserDefaults.standard.set(weatherData.fiveDaysForecast[i]["city"] as! String, forKey: "city")
+            slide.citySlideLabel.text = (weatherData.fiveDaysForecast[i]["city"] as! String)
                 
-            slides[i]?.temperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["temperature"] as! Double))
-            UserDefaults.standard.set(slides[i]?.temperatureSlideLabel.text, forKey: "temperature\(i)")
+                UserDefaults.standard.set(weatherData.fiveDaysForecast[i]["city"] as! String, forKey: "city")
+                
+            slide.temperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["temperature"] as! Double))
+        UserDefaults.standard.set(slide.temperatureSlideLabel.text, forKey: "temperature\(i)")
             
-            slides[i]?.morningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["morningTemperature"] as! Double))
-            UserDefaults.standard.set(slides[i]?.morningTemperatureSlideLabel.text, forKey: "morningTemperature\(i)")
+            slide.morningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["morningTemperature"] as! Double))
+        UserDefaults.standard.set(slide.morningTemperatureSlideLabel.text, forKey: "morningTemperature\(i)")
             
-            slides[i]?.eveningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: ((weatherData.fiveDaysForecast[i]["eveningTemperature"] as! Double))))
-            UserDefaults.standard.set(slides[i]?.eveningTemperatureSlideLabel.text, forKey: "eveningTemperature\(i)")
-                
-                
-                if let weatherState = weatherData.fiveDaysForecast[i]["weatherState"] as? String {
-                    slides[i]?.weatherStateSlideLabel.text = weatherState
-                   // UserDefaults.standard.set(weatherState, forKey: "weatherState\(i)")
-                    slides[i]?.weatherStateSlideIcon.image = UIImage(named: weatherState)
+            slide.eveningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: ((weatherData.fiveDaysForecast[i]["eveningTemperature"] as! Double))))
+        UserDefaults.standard.set(slide.eveningTemperatureSlideLabel.text, forKey: "eveningTemperature\(i)")
+            
+            if let weatherState = weatherData.fiveDaysForecast[i]["weatherState"] as? String {
+                    slide.weatherStateSlideLabel.text = weatherState
+                    UserDefaults.standard.set(weatherState, forKey: "weatherState\(i)")
+                    slide.weatherStateSlideIcon.image = UIImage(named: weatherState)
+                }
             }
              endShowingActivityIdicator()
         }
