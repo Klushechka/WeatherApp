@@ -110,8 +110,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             UserDefaults.standard.set(weatherData.fiveDaysForecast[i]["city"] as! String, forKey: "city")
                 
                 if gettingPartOfTheDay() != "evening" {
-                    slides[0]?.temperatureSlideLabel.font = UIFont.boldSystemFont(ofSize: slide.temperatureSlideLabel.font.pointSize)
-                    slides[0]?.dayLabel.font = UIFont.boldSystemFont(ofSize: slide.dayLabel.font.pointSize)
+                    if gettingPartOfTheDay() == "day" {
+                        // if it's day now, we make the day label and day temperature bold
+                        slides[0]?.temperatureSlideLabel.font = UIFont.boldSystemFont(ofSize: slide.temperatureSlideLabel.font.pointSize)
+                        slides[0]?.dayLabel.font = UIFont.boldSystemFont(ofSize: slide.dayLabel.font.pointSize)
+                    }
                     slide.temperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["temperature"] as! Double))
                     UserDefaults.standard.set(slide.temperatureSlideLabel.text, forKey: "temperature\(i)")
                 } else {
