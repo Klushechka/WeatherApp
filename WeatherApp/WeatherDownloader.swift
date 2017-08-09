@@ -39,7 +39,7 @@ class WeatherDownloader {
             let json = JSON(value)
                 
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd MMM"
+            dateFormatter.dateFormat = "d MMM yy"
             dateFormatter.locale = Locale(identifier: "en_US")
                 
                 //putting the weather forecast data into dictionaries

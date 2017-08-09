@@ -11,13 +11,15 @@ import CoreLocation
 import Foundation
 
 class ViewController: UIViewController, UIScrollViewDelegate {
-    @IBOutlet weak var pageScroller: UIPageControl!    
+    @IBOutlet weak var pageScroller: UIPageControl!
     @IBOutlet weak var slideScrollView: UIScrollView!
     var locationManager = CLLocationManager()
     lazy var slides = [Slide?]()
     lazy var pageIndex: CGFloat? = nil
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var temperatureSign = ""
+    let calendar = NSCalendar.current
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,9 +57,29 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         view.addSubview(activityIndicator)
     }
     
-     func endShowingActivityIdicator() {
+    func endShowingActivityIdicator() {
         activityIndicator.stopAnimating()
         activityIndicator.removeFromSuperview()
+    }
+    
+    func gettingPartOfTheDay() -> String {
+        let time = calendar.dateComponents([.hour], from: NSDate() as Date)
+        
+        var partOfDay = ""
+        
+        if let time = time.hour {
+            switch time {
+            case 0...11:
+                partOfDay = "morning"
+            case 12...16:
+                partOfDay = "day"
+            case 17...24:
+                partOfDay = "evening"
+            default:
+                break
+            }
+        }
+        return partOfDay
     }
     
     //defining the sign of temperature (+/- or nothing - for 0)
@@ -69,39 +91,67 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         } else {
             temperatureSign = ""
         }
-        return "\(temperatureSign)\( round((temperature - 273.15)*10)/10)˚"
+        //rounding the value to the nearest Int so that user won't see the decimal part
+        return "\(temperatureSign)\(Int(round(temperature - 273.15)))˚"
     }
     
     //updating labels values for views
     func updateUI(_ weatherData: WeatherData) {
         for i in 0..<slides.count {
             if let slide = slides[i] {
-            slide.backgroundSlideImage.image = UIImage(named: String(i))
+                slide.backgroundSlideImage.image = UIImage(named: String(i))
                 
-            //storing/caching the data so that user would see it while starting the app in the offline
-            slide.dateSlideLabel.text = (weatherData.fiveDaysForecast[i]["date"] as! String)
+                //storing/caching the data so that user would see it while starting the app in the offline
+                slide.dateSlideLabel.text = (weatherData.fiveDaysForecast[i]["date"] as! String)
                 UserDefaults.standard.set(weatherData.fiveDaysForecast[i]["date"] as! String, forKey: "date\(i)")
-            
-            slide.citySlideLabel.text = (weatherData.fiveDaysForecast[i]["city"] as! String)
                 
-                UserDefaults.standard.set(weatherData.fiveDaysForecast[i]["city"] as! String, forKey: "city")
+                slide.citySlideLabel.text = (weatherData.fiveDaysForecast[i]["city"] as! String)
                 
-            slide.temperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["temperature"] as! Double))
-        UserDefaults.standard.set(slide.temperatureSlideLabel.text, forKey: "temperature\(i)")
-            
-            slide.morningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["morningTemperature"] as! Double))
-        UserDefaults.standard.set(slide.morningTemperatureSlideLabel.text, forKey: "morningTemperature\(i)")
-            
-            slide.eveningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: ((weatherData.fiveDaysForecast[i]["eveningTemperature"] as! Double))))
-        UserDefaults.standard.set(slide.eveningTemperatureSlideLabel.text, forKey: "eveningTemperature\(i)")
-            
-            if let weatherState = weatherData.fiveDaysForecast[i]["weatherState"] as? String {
+            UserDefaults.standard.set(weatherData.fiveDaysForecast[i]["city"] as! String, forKey: "city")
+                
+                if gettingPartOfTheDay() != "evening" {
+                    slides[0]?.temperatureSlideLabel.font = UIFont.boldSystemFont(ofSize: slide.temperatureSlideLabel.font.pointSize)
+                    slides[0]?.dayLabel.font = UIFont.boldSystemFont(ofSize: slide.dayLabel.font.pointSize)
+                    slide.temperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["temperature"] as! Double))
+                    UserDefaults.standard.set(slide.temperatureSlideLabel.text, forKey: "temperature\(i)")
+                } else {
+                    slides[0]?.temperatureSlideLabel.text = "--"
+                    for var i in 1..<slides.count {
+                        slides[i]?.temperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["temperature"] as! Double))
+                        UserDefaults.standard.set(slide.temperatureSlideLabel.text, forKey: "temperature\(i)")
+                        i += 1
+                    }
+                }
+                
+                if gettingPartOfTheDay() == "morning" {
+                    slides[0]?.morningTemperatureSlideLabel.font = UIFont.boldSystemFont(ofSize: slide.morningTemperatureSlideLabel.font.pointSize)
+                     slides[0]?.morningLabel.font = UIFont.boldSystemFont(ofSize: slide.morningLabel.font.pointSize)
+                    slide.morningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["morningTemperature"] as! Double))
+                    UserDefaults.standard.set(slide.morningTemperatureSlideLabel.text, forKey: "morningTemperature\(i)")
+                } else {
+                    slides[0]?.morningTemperatureSlideLabel.text = "--"
+                    for var i in 1..<slides.count {
+                        slides[i]?.morningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: weatherData.fiveDaysForecast[i]["morningTemperature"] as! Double))
+                        UserDefaults.standard.set(slide.morningTemperatureSlideLabel.text, forKey: "morningTemperature\(i)")
+                        i += 1
+                    }
+                }
+                
+                if gettingPartOfTheDay() == "evening" {
+                    slides[0]?.eveningTemperatureSlideLabel.font = UIFont.boldSystemFont(ofSize: slide.eveningTemperatureSlideLabel.font.pointSize)
+                    slides[0]?.eveningLabel.font = UIFont.boldSystemFont(ofSize: slide.eveningLabel.font.pointSize)
+                }
+                
+                slide.eveningTemperatureSlideLabel.text = (getTemperatureWithSign(temperature: ((weatherData.fiveDaysForecast[i]["eveningTemperature"] as! Double))))
+                UserDefaults.standard.set(slide.eveningTemperatureSlideLabel.text, forKey: "eveningTemperature\(i)")
+                
+                if let weatherState = weatherData.fiveDaysForecast[i]["weatherState"] as? String {
                     slide.weatherStateSlideLabel.text = weatherState
                     UserDefaults.standard.set(weatherState, forKey: "weatherState\(i)")
                     slide.weatherStateSlideIcon.image = UIImage(named: weatherState)
                 }
             }
-             endShowingActivityIdicator()
+            endShowingActivityIdicator()
         }
     }
     
@@ -109,9 +159,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     func createSlides() -> [Slide?]?{
         let slide1: Slide? = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as? Slide
         let slide2: Slide? = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as? Slide
-         let slide3: Slide? = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as? Slide
-         let slide4: Slide? = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as? Slide
-         let slide5: Slide? = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as? Slide
+        let slide3: Slide? = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as? Slide
+        let slide4: Slide? = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as? Slide
+        let slide5: Slide? = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as? Slide
         return [slide1, slide2, slide3, slide4, slide5]
     }
     
@@ -123,8 +173,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             slideScrollView.isPagingEnabled = true
             
             for i in 0..<slides.count {
-            slides[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: view.frame.height)
-            slideScrollView.addSubview(slides[i])
+                slides[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: view.frame.height)
+                slideScrollView.addSubview(slides[i])
             }
         }
     }
@@ -135,9 +185,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         guard let longtitude = locationManager.location?.coordinate.longitude else { return }
         if Reachability.shared.isConnectedToNetwork() {
             WeatherDownloader.sharedWeatherInstance.gettingWeatherData(lat: latitude, lon: longtitude, completion: { (weatherData) in
-            self.updateUI(weatherData)
+                self.updateUI(weatherData)
                 print ("Updated!")
-        })
+            })
         } else if !Reachability.shared.isConnectedToNetwork() {
             showAlert(title: "No Internet connection", message: "Please connect to the Internet and try again", buttonName: "Ok")
             endShowingActivityIdicator()
@@ -198,26 +248,37 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     // using viewDidAppear to make sure that ui is really ready to show the cached data
     override func viewDidAppear(_ animated: Bool) {
         for i in 0..<slides.count {
-            if let temp = UserDefaults.standard.object(forKey: "temperature\(i)") {
-                slides[i]?.temperatureSlideLabel.text = temp as? String
-            }
-            if let temp = UserDefaults.standard.object(forKey: "morningTemperature\(i)") {
-                slides[i]?.morningTemperatureSlideLabel.text = temp as? String
-            }
-            
-            if let temp = UserDefaults.standard.object(forKey: "eveningTemperature\(i)") {
-                slides[i]?.eveningTemperatureSlideLabel.text = temp as? String
-            }
-            
-            if let city = UserDefaults.standard.object(forKey: "city") {
-                slides[i]?.citySlideLabel.text = city as? String
-            }
-            if let date = UserDefaults.standard.object(forKey: "date\(i)") {
-                slides[i]?.dateSlideLabel.text = date as? String
-            }
-            if let weatherState = UserDefaults.standard.object(forKey: "weatherState\(i)") {
-                slides[i]?.weatherStateSlideLabel.text = weatherState as? String
-                slides[i]?.weatherStateSlideIcon.image = UIImage(named: weatherState as! String)
+            if let slide = slides[i] {
+                if let temp = UserDefaults.standard.object(forKey: "temperature\(i)") {
+                    if gettingPartOfTheDay() != "evening" {
+                        slide.temperatureSlideLabel.text = temp as? String
+                    } else {
+                        //we'll hide the temperature of day for today if it's evening
+                        slides[0]?.temperatureSlideLabel.text = "--"
+                    }
+                }
+                
+                if let temp = UserDefaults.standard.object(forKey: "morningTemperature\(i)") {
+                    if gettingPartOfTheDay() == "morning" {
+                        slide.morningTemperatureSlideLabel.text = temp as? String
+                    } else {
+                        //we'll hide the morning temperature for today if it's already day or evening
+                        slides[0]?.morningTemperatureSlideLabel.text = "--"
+                    }
+                }
+                if let temp = UserDefaults.standard.object(forKey: "eveningTemperature\(i)") {
+                    slide.eveningTemperatureSlideLabel.text = temp as? String
+                }
+                if let city = UserDefaults.standard.object(forKey: "city") {
+                    slide.citySlideLabel.text = city as? String
+                }
+                if let date = UserDefaults.standard.object(forKey: "date\(i)") {
+                    slide.dateSlideLabel.text = date as? String
+                }
+                if let weatherState = UserDefaults.standard.object(forKey: "weatherState\(i)") {
+                    slide.weatherStateSlideLabel.text = weatherState as? String
+                    slide.weatherStateSlideIcon.image = UIImage(named: weatherState as! String)
+                }
             }
         }
     }
@@ -252,3 +313,4 @@ extension ViewController : CLLocationManagerDelegate {
         loadWeatherAndUpdateUI()
     }
 }
+

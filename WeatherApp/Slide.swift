@@ -12,6 +12,9 @@ class Slide: UIView {
     @IBOutlet weak var backgroundSlideImage: UIImageView!
     @IBOutlet weak var dateSlideLabel: UILabel!
     @IBOutlet weak var citySlideLabel: UILabel!
+    @IBOutlet weak var morningLabel: UILabel!
+    @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var eveningLabel: UILabel!
     @IBOutlet weak var morningTemperatureSlideLabel: UILabel!
     @IBOutlet weak var eveningTemperatureSlideLabel: UILabel!
     @IBOutlet weak var temperatureSlideLabel: UILabel!
