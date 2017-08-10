@@ -258,6 +258,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                     } else {
                         //we'll hide the temperature of day for today if it's evening
                         slides[0]?.temperatureSlideLabel.text = "--"
+                        //we'll take the stored values of day temperature for all slides except the first if it's evening
+                        for var i in 1..<slides.count {
+                            slides[i]?.temperatureSlideLabel.text = temp as? String
+                            i += 1
+                        }
                     }
                 }
                 
@@ -267,6 +272,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                     } else {
                         //we'll hide the morning temperature for today if it's already day or evening
                         slides[0]?.morningTemperatureSlideLabel.text = "--"
+                        //we'll take the stored values of morning temperature for all slides except the first if it's day or evening
+                        for var i in 1..<slides.count {
+                            slides[i]?.morningTemperatureSlideLabel.text = temp as? String
+                                i += 1
+                        }
                     }
                 }
                 if let temp = UserDefaults.standard.object(forKey: "eveningTemperature\(i)") {
