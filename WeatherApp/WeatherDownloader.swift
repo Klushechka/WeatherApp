@@ -1,4 +1,3 @@
-//
 //  WeatherDownloader.swift
 //  WeatherApp
 //
@@ -7,8 +6,9 @@
 //
 
 import Foundation
-import Alamofire
 import SwiftyJSON
+import Alamofire
+
 
 class WeatherDownloader {
     static var sharedWeatherInstance = WeatherDownloader()

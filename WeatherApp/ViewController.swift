@@ -84,15 +84,13 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     
     //defining the sign of temperature (+/- or nothing - for 0)
     func getTemperatureWithSign(temperature: Double) -> String {
-        if (temperature - 273.15) > 0 {
+        let roundedTemperature = Int(round(temperature - 273.15))
+        if roundedTemperature >= 1 { // //rounding the value to the nearest Int so that user won't see the decimal part
             temperatureSign = "+"
-        } else if (temperature - 273.15) < 0 {
-            temperatureSign = "-"
         } else {
             temperatureSign = ""
         }
-        //rounding the value to the nearest Int so that user won't see the decimal part
-        return "\(temperatureSign)\(Int(round(temperature - 273.15)))˚"
+        return "\(temperatureSign)\(roundedTemperature)˚"
     }
     
     //updating labels values for views
